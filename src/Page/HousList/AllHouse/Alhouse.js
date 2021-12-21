@@ -6,7 +6,7 @@ const Alhouse = () => {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://rocky-bayou-43088.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data));
 
@@ -14,7 +14,7 @@ const Alhouse = () => {
     const handleDeleteProduct = id => {
         const proced = window.confirm('Are You sure you want to delete..?');
         if (proced) {
-            const url = `http://localhost:5000/products/${id}`;
+            const url = `https://rocky-bayou-43088.herokuapp.com/products/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

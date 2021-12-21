@@ -41,7 +41,7 @@ const AddProducts = () => {
             ...initialInfo, house, Price, squre, type, floorNo, floorSide, rooms, Bedrooms, Bathrooms, Garage, sellfor, build, description, img
         }
         console.log(newServices);
-        fetch('http://localhost:5000/products', {
+        fetch('https://rocky-bayou-43088.herokuapp.com/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

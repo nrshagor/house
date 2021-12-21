@@ -7,7 +7,7 @@ const SingleHouse = () => {
 
     const { id } = useParams();
     useEffect(() => {
-        const url = `http://localhost:5000/products/${id}`;
+        const url = `https://rocky-bayou-43088.herokuapp.com/products/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setMyPlan(data));
