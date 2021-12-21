@@ -31,6 +31,8 @@ const Deshbord = () => {
                                             </>
                                         }
                                         <Nav.Link as={Link} to="myorder">My Order</Nav.Link>
+                                        <Nav.Link as={Link} to="addProduct">Add Product</Nav.Link>
+                                        <Nav.Link as={Link} to="editProduct">Edit Product</Nav.Link>
 
 
                                     </Nav>

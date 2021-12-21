@@ -12,8 +12,8 @@ const Slider = () => {
                     <button className="btn-skewX">
                         <p>The All New</p>
                     </button>
-                    <h1>The most powerful car</h1>
-                    <p>High Performance  Outstanding <br />Technology Combined </p>
+                    <h1>The Beautiful House</h1>
+                    <p>Asome Design <br />and decoration </p>
 
 
                     <div style={{ marginTop: '10px' }} className="line "></div>

@@ -1,15 +1,21 @@
-import React, { useRef, Component } from 'react';
+import React, { useRef, Component, useState, useEffect } from 'react';
 import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
-import useAuth from "../../Hook/useAuth";
-import './AddProduct.css'
-const AddProducts = () => {
-    const { user } = useAuth()
+import '../AddProducts/AddProduct.css'
+
+const EditProduct = () => {
+    const [myPlan, setMyPlan] = useState({});
+
+    useEffect(() => {
+        const url = `http://localhost:5000/products/61c0d707f2634684524bbfc3`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setMyPlan(data));
+    }, [])
+    console.log(myPlan);
     const houseRef = useRef();
     const priceRef = useRef();
     const squreRef = useRef();
     const typeRef = useRef();
-    const floorNoRef = useRef();
-    const floorSideRef = useRef();
     const roomRef = useRef();
     const BedroomsRef = useRef();
     const BathroomsRef = useRef();
@@ -17,17 +23,15 @@ const AddProducts = () => {
     const buildRef = useRef();
     const forRef = useRef();
     const textRef = useRef();
+
     const imgRef = useRef();
-    const initialInfo = { customerName: user.displayName, email: user.email }
-    console.log(initialInfo);
+
     const handleAddServices = e => {
 
         const house = houseRef.current.value;
         const Price = priceRef.current.value;
         const squre = squreRef.current.value;
         const type = typeRef.current.value;
-        const floorNo = floorNoRef.current.value;
-        const floorSide = floorSideRef.current.value;
         const rooms = roomRef.current.value;
         const Bedrooms = BedroomsRef.current.value;
         const Bathrooms = BathroomsRef.current.value;
@@ -38,11 +42,11 @@ const AddProducts = () => {
 
         const img = imgRef.current.value;
         const newServices = {
-            ...initialInfo, house, Price, squre, type, floorNo, floorSide, rooms, Bedrooms, Bathrooms, Garage, sellfor, build, description, img
+            house, Price, squre, type, rooms, Bedrooms, Bathrooms, Garage, sellfor, build, description, img
         }
         console.log(newServices);
-        fetch('http://localhost:5000/products', {
-            method: 'POST',
+        fetch('http://localhost:5000/products/61c0d707f2634684524bbfc3', {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -75,7 +79,7 @@ const AddProducts = () => {
                                             <Form.Label>House Name</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-building"></i></InputGroup.Text>
-                                                <Form.Control ref={houseRef} type="text" placeholder="Enter House Name" />
+                                                <Form.Control ref={houseRef} defaultValue={myPlan.house} type="text" placeholder="Enter House Name" />
                                             </InputGroup>
 
                                         </Form.Group>
@@ -83,7 +87,7 @@ const AddProducts = () => {
                                             <Form.Label>Price</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-file-invoice-dollar"></i></InputGroup.Text>
-                                                <Form.Control ref={priceRef} type="text" placeholder="Enter Price" />
+                                                <Form.Control ref={priceRef} defaultValue={myPlan.Price} type="text" placeholder="Enter Price" />
                                             </InputGroup>
 
                                         </Form.Group>
@@ -91,7 +95,7 @@ const AddProducts = () => {
                                             <Form.Label>Squre ft</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-th"></i></InputGroup.Text>
-                                                <Form.Control ref={squreRef} type="text" placeholder="Enter Squre ft" />
+                                                <Form.Control ref={squreRef} defaultValue={myPlan.squre} type="text" placeholder="Enter Squre ft" />
                                             </InputGroup>
 
                                         </Form.Group>
@@ -100,7 +104,7 @@ const AddProducts = () => {
                                             <Form.Label>Property Type</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-laptop-house"></i></InputGroup.Text>
-                                                <Form.Select ref={typeRef}>
+                                                <Form.Select ref={typeRef} defaultValue={myPlan.type}>
                                                     <option value="House">House</option>
                                                     <option value="Apartment">Apartment</option>
                                                     <option value="Office">Office</option>
@@ -110,59 +114,45 @@ const AddProducts = () => {
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
-                                            <Form.Label>Floor No</Form.Label>
-                                            <InputGroup className="mb-3">
-                                                <InputGroup.Text><i className="fas fa-sliders-h"></i></InputGroup.Text>
-                                                <Form.Control ref={floorNoRef} type="text" placeholder="Enter Squre ft" />
-                                            </InputGroup>
-                                        </Form.Group>
-                                        <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
-                                            <Form.Label>Floor side</Form.Label>
-                                            <InputGroup className="mb-3">
-                                                <InputGroup.Text><i className="fas fa-sitemap"></i></InputGroup.Text>
-                                                <Form.Control ref={floorSideRef} type="text" placeholder="Enter Squre ft" />
-                                            </InputGroup>
-                                        </Form.Group>
-                                        <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
                                             <Form.Label>Rooms</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-igloo"></i></InputGroup.Text>
-                                                <Form.Control ref={roomRef} type="text" placeholder="Enter Squre ft" />
+                                                <Form.Control ref={roomRef} defaultValue={myPlan.rooms} type="text" placeholder="Enter Squre ft" />
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
                                             <Form.Label>Bedrooms</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-bed"></i></InputGroup.Text>
-                                                <Form.Control ref={BedroomsRef} type="text" placeholder="Enter Squre ft" />
+                                                <Form.Control ref={BedroomsRef} defaultValue={myPlan.Bedrooms} type="text" placeholder="Enter Squre ft" />
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
                                             <Form.Label>Bathrooms</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-bath"></i></InputGroup.Text>
-                                                <Form.Control ref={BathroomsRef} type="text" placeholder="Enter Squre ft" />
+                                                <Form.Control ref={BathroomsRef} defaultValue={myPlan.Bathrooms} type="text" placeholder="Enter Squre ft" />
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
                                             <Form.Label>Garage</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-warehouse"></i></InputGroup.Text>
-                                                <Form.Control ref={GarageRef} type="text" placeholder="Enter Squre ft" />
+                                                <Form.Control ref={GarageRef} defaultValue={myPlan.Garage} type="text" placeholder="Enter Squre ft" />
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group as={Col} className="col-12 col-lg-4" controlId="">
                                             <Form.Label>Year build</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-calendar-alt"></i></InputGroup.Text>
-                                                <Form.Control ref={buildRef} type="text" placeholder="Enter Squre ft" />
+                                                <Form.Control ref={buildRef} defaultValue={myPlan.build} type="text" placeholder="Enter Squre ft" />
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group as={Col} className="col-12 col-lg-4" controlId="formGridState">
                                             <Form.Label>Property For</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-hand-point-right"></i></InputGroup.Text>
-                                                <Form.Select ref={forRef}>
+                                                <Form.Select ref={forRef} defaultValue={myPlan.sellfor}>
                                                     <option value="Sell">Sell</option>
                                                     <option value="Rent">Rent</option>
                                                 </Form.Select>
@@ -172,14 +162,18 @@ const AddProducts = () => {
                                             <Form.Label>Image URL</Form.Label>
                                             <InputGroup className="mb-3">
                                                 <InputGroup.Text><i className="fas fa-images"></i></InputGroup.Text>
-                                                <Form.Control ref={imgRef} type="text" placeholder="Enter Image URL" />
+                                                <Form.Control ref={imgRef} defaultValue={myPlan.img} type="text" placeholder="Enter Image URL" />
                                             </InputGroup>
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                             <Form.Label>Description</Form.Label>
-                                            <Form.Control ref={textRef} as="textarea" rows={3} />
+                                            <Form.Control ref={textRef} defaultValue={myPlan.description} as="textarea" rows={3} />
                                         </Form.Group>
                                     </Row>
+
+
+
+
                                     <Button variant="primary" type="submit" value="Add">
                                         Add product
                                     </Button>
@@ -194,5 +188,4 @@ const AddProducts = () => {
     );
 };
 
-
-export default AddProducts;
+export default EditProduct;

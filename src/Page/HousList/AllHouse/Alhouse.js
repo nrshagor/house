@@ -35,51 +35,33 @@ const Alhouse = () => {
                     <h1>Our Latest Products</h1>
                     <div className="card-body">
 
-
-                        <div className="card">
-                            <div className="products-img">
-                                <img src="" alt="" />
-                            </div>
-                            <div className="products-info">
-                                <h1>House Name</h1>
-                                <p>Price</p>
-                                <div className='house-info'>
-                                    <p><span><i class="fas fa-bed"></i> 4 bedrooms</span> <span><i class="fas fa-bath"></i> 2 bathrooms
-                                    </span>
-                                        <span><i class="fas fa-th"></i> 1200 squre ft</span> <span><i class="fas fa-warehouse"></i> 2 garages</span></p>
+                        {
+                            products.map(product =>
+                                <div key={product._id} className="card">
+                                    <div className="products-img">
+                                        <img src={product.img} alt="" />
+                                    </div>
+                                    <div className="products-info">
+                                        <h1>{product.house}</h1>
+                                        <p>Price: {product.Price} TK</p>
+                                        <div className='house-info'>
+                                            <p><i className="fas fa-bed"></i> {product.Bedrooms}<span> Bedrooms</span></p>
+                                            <p><i className="fas fa-bath"></i> {product.Bathrooms}<span> Bathrooms</span></p>
+                                            <p> <i className="fas fa-th"></i> {product.squre} <span>squre ft</span></p>
+                                            <p>  <i className="fas fa-warehouse"></i> {product.Garage}<span> Garage</span></p>
+                                        </div>
+                                        <button className="btn btn-danger mx-2" onClick={() => handleDeleteProduct(product._id)}>Cancel</button>
+                                        <Link to="/products"><button className="btn btn-warning">View All</button></Link>
+                                        <Link to={`/singlehouse/${product._id}`}><button className="btn btn-warning">Read More</button></Link>
+                                    </div>
                                 </div>
-
-                                <Link to="/products"><button className="btn btn-warning">View All</button></Link>
-                            </div>
-                        </div>
-
+                            )
+                        }
 
                     </div>
                 </div>
             </section>
-            <div className=" mr-3 w-100  d-flex justify-content-center align-items-center row row-cols-1 row-cols-md-4 my-3 g-5">
 
-
-                {
-                    products.map(product =>
-                        <div className="card">
-                            <div className="products-img">
-                                <img src={product.img} alt="" />
-                            </div>
-                            <div className="products-info">
-                                <h1>Brand Name: {product.brand}</h1>
-                                <p>Model: {product.model}</p>
-                                <p><span>Trim: {product.trim}</span> <span>Manufacture: {product.manufacture}</span></p>
-                                <p>Description:{product.description}</p>
-
-                                <p>Price{product.price}</p>
-
-
-
-                            </div>
-                        </div>)
-                }
-            </div >
 
 
         </>

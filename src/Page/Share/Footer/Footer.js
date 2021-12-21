@@ -12,10 +12,10 @@ const Footer = () => {
                         <p> Hello dear. I am N R Shagor. A web developer</p>
                         <ul className='ps-0 sci'>
                             <li><a href="https://www.facebook.com/nrshagor" target="_blank"><i className="fab fa-facebook"></i></a></li>
-                            <li><a href="https://www.linkedin.com/in/nrshagor/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                            <li><a href="https://github.com/nrshagor" target="_blank"><i class="fab fa-github"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/nrshagor/" target="_blank"><i className="fab fa-linkedin"></i></a></li>
+                            <li><a href="https://github.com/nrshagor" target="_blank"><i className="fab fa-github"></i></a></li>
                             <li><a href="https://twitter.com/nrshagor" target="_blank"><i className="fab fa-twitter"></i></a></li>
-                            <li><a href="https://www.youtube.com/c/NRSHAGOR" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="https://www.youtube.com/c/NRSHAGOR" target="_blank"><i className="fab fa-youtube"></i></a></li>
                         </ul>
                     </div>
                     <div className="sec quicklinks">
@@ -24,7 +24,7 @@ const Footer = () => {
                             <li><Link to='/home'>Home</Link></li>
                             <li><Link to='/about'>About</Link></li>
                             <li><Link to='/projects'>Projects</Link></li>
-                            <li><a href='#'><i class="fas fa-arrow-up" title='TOP'></i></a></li>
+                            <li><a href='#'><i className="fas fa-arrow-up" title='TOP'></i></a></li>
 
                         </ul>
                     </div>

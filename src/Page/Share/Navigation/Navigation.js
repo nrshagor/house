@@ -27,7 +27,7 @@ const Navigation = () => {
                 <ul className={clicked ? 'nav-menu active' : 'nav-menu'}>
                     {MenuItem.map((item, index) => {
                         return (
-                            <li><Link className={item.cName} to={item.url}>{item.title}</Link></li>
+                            <li><Link key={item._id} className={item.cName} to={item.url}>{item.title}</Link></li>
                             // <li><a className={item.cName} href={item.url} smooth={true} duration={1000}>{item.title}</a></li>
                         )
                     })}

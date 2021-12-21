@@ -2,11 +2,13 @@
     width: 100%;
 }
 .house-info{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-column-gap: 17px;
+    grid-template-columns: repeat(2,2fr);
 }
-.house-info span{
-    padding: 20px;
+.house-info p{
+    text-align: justify;
+
 }
 .card-body{
     display: grid;
@@ -27,7 +29,7 @@
 }
 .products-img img{
 width: 100%;
-max-height: 250px;
+
 min-height: 250px;
 display: block;
 } 
